@@ -10,10 +10,7 @@ public class EnemyMovment : MonoBehaviour
     private int index = 0;
     private Vector2 finalPosition;
 
-    private void Awake()
-    {
-        spawner = FindAnyObjectByType<EnemySpawner>();
-    }
+    private void Awake() => spawner = FindAnyObjectByType<EnemySpawner>();
 
     void Start()
     {
@@ -21,17 +18,14 @@ public class EnemyMovment : MonoBehaviour
         waveConfig = spawner.GetCurrentWave();
         waypoints = waveConfig.GetWaypoints();
         
-        // Helps in destroying game object
+        // Helps in destroying game object after reaching final position
         finalPosition = waypoints[waypoints.Count - 1].position;
         
         // Set first waypoint
         transform.position = waypoints[index].position;
     }
 
-    void Update()
-    {
-        MoveEnemyToWaypoint();
-    }
+    void Update() => MoveEnemyToWaypoint();
 
     private void MoveEnemyToWaypoint()
     {
@@ -52,7 +46,7 @@ public class EnemyMovment : MonoBehaviour
                 index++;
             }
         }
-
+        // Method will destroy the enemy game object after they reached the final point
         DestroyGameObject();
     }
 

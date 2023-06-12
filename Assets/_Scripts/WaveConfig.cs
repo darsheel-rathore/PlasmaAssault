@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Wave Config", menuName = "Wave Config")]
 public class WaveConfig : ScriptableObject
 {
+    // Prefab Fields
     [SerializeField] List<GameObject> enemyPrefab;
+    [SerializeField] GameObject projectilePrefab;
+
     [SerializeField] Transform waypoints;
 
     // Move speed of the enemy
@@ -23,6 +26,8 @@ public class WaveConfig : ScriptableObject
     public float GetMoveSpeed() => moveSpeed;
 
     public Transform GetStartingWaypoint() => waypoints.GetChild(0);
+
+    public GameObject GetProjectilePrefab() => projectilePrefab;
 
     public List<Transform> GetWaypoints()
     {

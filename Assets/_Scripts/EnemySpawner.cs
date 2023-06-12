@@ -6,33 +6,40 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] List<WaveConfig> enemyWaves;
     [SerializeField] float timeBetweenWaves = 0f;
+    [SerializeField] bool isLooping = true;
     WaveConfig currentWave;
+
 
     private void Start() => StartCoroutine(SpawnWaves());
 
     public WaveConfig GetCurrentWave() => currentWave;
 
+    // Coroutine for spawning waves
     IEnumerator SpawnWaves()
     {
-        // Loop through every wave
-        foreach (WaveConfig enemyWave in enemyWaves)
+        do
         {
-            currentWave = enemyWave;
-
-            // Instantiate all enemy in the wave config 
-            for (int i = 0; i < enemyWave.GetEnemyPrefabCount(); i++)
+            // Loop through every wave
+            foreach (WaveConfig enemyWave in enemyWaves)
             {
-                // Instantiate and set as a child
-                Instantiate(enemyWave.GetEnemyPrefab(i), 
-                            enemyWave.GetStartingWaypoint().position, 
-                            Quaternion.identity, 
-                            transform);
+                currentWave = enemyWave;
 
-                // Random wait time between spawning of enemy
-                yield return new WaitForSeconds(enemyWave.GetRandomSpawnTime());
+                // Instantiate all enemy in the wave config 
+                for (int i = 0; i < enemyWave.GetEnemyPrefabCount(); i++)
+                {
+                    // Instantiat enemy and set it as a child game object
+                    Instantiate(enemyWave.GetEnemyPrefab(i),
+                                enemyWave.GetStartingWaypoint().position,
+                                Quaternion.Euler(0, 0, 180),
+                                transform);
+
+                    // Random wait time between spawning of enemy
+                    yield return new WaitForSeconds(enemyWave.GetRandomSpawnTime());
+                }
+                // Wait time between switching of waves
+                yield return new WaitForSeconds(timeBetweenWaves);
             }
-            // Wait time between switching of waves
-            yield return new WaitForSeconds(timeBetweenWaves);
         }
+        while (isLooping);
     }
 }
