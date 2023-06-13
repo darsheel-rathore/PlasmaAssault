@@ -10,9 +10,16 @@ public class EnemySpawner : MonoBehaviour
     WaveConfig currentWave;
 
 
-    private void Start() => StartCoroutine(SpawnWaves());
+    private void Start() => StartCoroutine(PreWarm());
 
     public WaveConfig GetCurrentWave() => currentWave;
+
+    IEnumerator PreWarm()
+    {
+        
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(SpawnWaves());
+    }
 
     // Coroutine for spawning waves
     IEnumerator SpawnWaves()
