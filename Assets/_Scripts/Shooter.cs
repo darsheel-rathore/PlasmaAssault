@@ -90,6 +90,8 @@ public class Shooter : MonoBehaviour
             audioPlayer.PlayShootingClip();
 
             yield return new WaitForSeconds(timeToNextProjectile);
+
+            
         }
     }
 

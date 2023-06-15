@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     private ScoreKeeper scoreKeeper;
     private GameObject temporaryObjects;
     private UIDisplay uiDisplay;
+    private LevelManager levelManager;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour
         scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
         temporaryObjects = GameObject.Find("TempGameObject");
         uiDisplay = FindAnyObjectByType<UIDisplay>();
+        levelManager = FindAnyObjectByType<LevelManager>();
     }
 
     public int GetHealth() => health;
@@ -85,7 +87,13 @@ public class Health : MonoBehaviour
                 uiDisplay.UpdateScore(scoreKeeper.GetScore());
             }
         }
+        else
+        {
 
+            // Load Game over scene
+            if (levelManager != null)
+                levelManager.LoadGameOver();
+        }
         // Destroy the game object 
         Destroy(gameObject);
     }

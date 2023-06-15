@@ -9,9 +9,20 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreText;
 
+    private ScoreKeeper scoreKeeper;
+    private Health playerHealth;
+
+    private void Awake()
+    {
+        scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
+        playerHealth = FindAnyObjectByType<PlayerMovement>().GetComponent<Health>();
+    }
+
     private void Start()
     {
-        healthSlider.value = 1;
+        // Init values
+        healthSlider.value = playerHealth.GetHealth();
+        scoreText.text = scoreKeeper.GetScore().ToString("0000000");
     }
 
     public void UpdateScore(int value)
