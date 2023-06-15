@@ -19,6 +19,7 @@ public class ScoreKeeper : MonoBehaviour
         instance = this;
         // Dont destroy on new scene
         DontDestroyOnLoad(gameObject);
+        Debug.Log("ASD");
     }
 
     public int GetScore() => score;
