@@ -14,6 +14,7 @@ public class ScoreKeeper : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Debug.Log("Save mat karna");
 
         // Set to this instance
         instance = this;
