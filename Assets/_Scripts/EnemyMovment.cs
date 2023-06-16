@@ -56,4 +56,13 @@ public class EnemyMovment : MonoBehaviour
         if (Vector2.Distance(transform.position, finalPosition) <= 0.1f)
             Destroy(gameObject);
     }
+
+    private void NewDevlopmentBuid()
+    {
+        // Destroy this game object is the enemy persist the final way point 
+        if(isActiveAndEnabled)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
