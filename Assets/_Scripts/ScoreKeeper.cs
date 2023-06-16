@@ -7,7 +7,7 @@ public class ScoreKeeper : MonoBehaviour
     [SerializeField] private int score;
 
     public static ScoreKeeper instance;
-
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -30,6 +30,18 @@ public class ScoreKeeper : MonoBehaviour
     {
         Debug.Log("Score Keepre Modify Score called");
         score += value;
+        
+        
+        
+        test newTest = new test();
+
+        newTest.num = 554;
+        //test.num = value;
+        
+        
+
+
+
         // Clamp the value so it not reaches below 0
         score = Mathf.Clamp(score, 0, int.MaxValue);
     }
